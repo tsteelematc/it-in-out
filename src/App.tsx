@@ -5,8 +5,10 @@ import { ImageMap } from "@qiuz/react-image-map";
 import { Area } from '@qiuz/react-image-map';
 import data from './data.json';
 import { createStatus, updateStatus } from './graphql/mutations';
-import { API } from 'aws-amplify';
+import { API, graphqlOperation } from 'aws-amplify';
 import { getStatus } from './graphql/queries';
+import { onUpdateStatus } from './graphql/subscriptions';
+
 interface AreaType extends Area {
   href?: string;
 }
@@ -20,9 +22,31 @@ function App() {
 
   const [inEmployees, setInEmployees] = useState(inArray);
 
+  // const subscription = (API.graphql(
+  //   graphqlOperation(onUpdateStatus)
+  // ) as any).subscribe({
+  //   next: (data: any) => console.log(data),
+  //   error: (error: any) => console.error(error)
+  // });
+
+
+  const subscribeToUpdateStatus = () => {
+    return (API.graphql({
+      query: onUpdateStatus
+    }) as any).subscribe({
+        next: (data: any) => {
+          console.log(data);
+          setInEmployees(data.value.data.onUpdateStatus.in);
+      }
+    });
+  };
+
   useEffect(
     () => {
       loadInEmployees();
+      const sub = subscribeToUpdateStatus();
+
+      return () => sub.unsubscribe();
     }
     , []
   );
