@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import { ImageMap } from "@qiuz/react-image-map";
@@ -6,7 +6,7 @@ import { Area } from '@qiuz/react-image-map';
 import data from './data.json';
 import { createStatus } from './graphql/mutations';
 import { API } from 'aws-amplify';
-
+import { getStatus } from './graphql/queries';
 interface AreaType extends Area {
   href?: string;
 }
@@ -19,6 +19,30 @@ function App() {
   console.log(lookup);
 
   const [inEmployees, setInEmployees] = useState(inArray);
+
+  useEffect(
+    () => {
+      loadInEmployees();
+    }
+    , []
+  );
+
+  const loadInEmployees = async () => {
+    try {
+      const data = await API.graphql({
+        query: getStatus, 
+        variables: {
+          id: "183dcbc8-5e2e-4bf2-8a4c-f100a776dcdf"
+        }   
+      });
+
+      console.log((data as any).data.getStatus.in);
+      setInEmployees((data as any).data.getStatus.in);
+      
+    } catch (err) {
+      console.error('error: ', err);
+    }
+  };    
 
   const mapArea: any[] = [
     {}
