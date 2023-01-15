@@ -4,6 +4,8 @@ import './App.css';
 import { ImageMap } from "@qiuz/react-image-map";
 import { Area } from '@qiuz/react-image-map';
 import data from './data.json';
+import { createStatus } from './graphql/mutations';
+import { API } from 'aws-amplify';
 
 interface AreaType extends Area {
   href?: string;
@@ -110,6 +112,21 @@ function App() {
   };
   
   const img = "https://tsteelematc.github.io/it-in-out/it-in-out-all.jpg";
+
+  // Run once...
+  // const foo = async () => {
+  //   await API.graphql({
+  //     query: createStatus,
+  //     variables: { 
+  //       input: {
+  //         name: 'inEmployees'
+  //         , in: ["Tom"]
+  //       } 
+  //     }
+  //   });
+  // }
+
+  // foo();
 
   return (
     <div className="App">
