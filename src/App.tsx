@@ -7,38 +7,46 @@ interface AreaType extends Area {
   href?: string;
 }
 
+let inArray: string[] = ["Tom"];
+
 const onMapClick = (area: AreaType, index: number) => {
   const tip = `click map${area.href || index + 1}`;
   console.log(tip);
   alert(tip);
+
+  if (!inArray.some(x => x == "Tom")) {
+    inArray = [
+      ...inArray
+      , "Tom"
+    ]
+  }
+  else {
+    inArray = inArray.filter(x => x != "Tom");
+  }
+  
 };
 
 const mapArea: any[] = [
   {
-    left: "0%",
-    top: "6%",
-    height: "12%",
-    width: "33%",
-    style: { background: "rgba(255, 0, 0, 0.5)" },
-    onMouseOver: () => console.log("map onMouseOver")
-  },
-  {
-    width: "33%",
-    height: "12%",
-    left: "0%",
-    top: "36.37931034482759%",
-    style: { background: "rgba(255, 0, 0, 0.5)" },
+    left: "2%",
+    top: "3%",
+    height: "14%",
+    width: "9%",
+    style: { background: inArray.some(x => x == "Tom") ? "rgba(0, 255, 0, 0.25)": "rgba(127, 127, 127, 0.25)" },
     render: (area: any, index: number) => (
-      <span
+      <div
         style={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: "rgba(255, 255, 0, 0.5)"
+          justifyItems: 'center',
+          alignContent: 'center',
+          fontWeight: 'bold',
+          height: '90px'
         }}
       >
-        can render map node
-      </span>
+        Tom
+      </div>
     ),
     onMouseOver: () => console.log("map onMouseOver")
   }
@@ -46,7 +54,6 @@ const mapArea: any[] = [
 
 function App() {
   const img = "https://tsteelematc.github.io/it-in-out/it-in-out-all.jpg";
-  // const img = "https://i.etsystatic.com/28692092/r/il/d13717/2975668784/il_1588xN.2975668784_nj6x.jpg";
 
   const ImageMapComponent = React.useMemo(
     () => (
