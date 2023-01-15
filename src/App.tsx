@@ -4,7 +4,7 @@ import './App.css';
 import { ImageMap } from "@qiuz/react-image-map";
 import { Area } from '@qiuz/react-image-map';
 import data from './data.json';
-import { createStatus } from './graphql/mutations';
+import { createStatus, updateStatus } from './graphql/mutations';
 import { API } from 'aws-amplify';
 import { getStatus } from './graphql/queries';
 interface AreaType extends Area {
@@ -38,11 +38,29 @@ function App() {
 
       console.log((data as any).data.getStatus.in);
       setInEmployees((data as any).data.getStatus.in);
-      
+
     } catch (err) {
       console.error('error: ', err);
     }
   };    
+
+  const updateInEmployees = async () => {
+    try {
+      await API.graphql({
+        query: updateStatus
+        , variables: {
+          input: {
+            id: "183dcbc8-5e2e-4bf2-8a4c-f100a776dcdf"
+            , in: inEmployees
+          }
+        }
+      });
+    }
+
+    catch (err) {
+      console.error(err);
+    }
+  };
 
   const mapArea: any[] = [
     {}
@@ -119,7 +137,7 @@ function App() {
     }
   ];
   
-  const onMapClick = (area: AreaType, index: number) => {
+  const onMapClick = async (area: AreaType, index: number) => {
     const oneBasedStringIndex = (index + 1).toString();
 
     console.log(index, oneBasedStringIndex);
@@ -133,6 +151,8 @@ function App() {
     else {
       setInEmployees(inEmployees.filter(x => x != lookup.get(oneBasedStringIndex)));
     }
+
+    await updateInEmployees();
   };
   
   const img = "https://tsteelematc.github.io/it-in-out/it-in-out-all.jpg";
