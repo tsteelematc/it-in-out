@@ -114,13 +114,94 @@ function App() {
       : "OUT"
   ;
 
+  const OverlayComponent = ({index}: any) => (
+    <div
+    style={overlayStyle}
+    >
+      <div>
+        {lookup.get(index)}
+      </div>
+      <div
+        style={overlayInOutStyle}
+      >
+        {overlayInOut(index)}
+      </div>
+    </div>
+  );
+
   const mapArea: any[] = [
-    {}
-    , {}
-    , {}
-    , {}
-    , {}
-    , {}
+    {
+      left: "2%",
+      top: "58%",
+      height: "14%",
+      width: "9%",
+      style: overlayBackground("1"),
+      render: (area: any, index: number) => (
+        <OverlayComponent 
+          index="1"
+        />
+      ),      
+    }
+    , {
+      left: "2%",
+      top: "72.5%",
+      height: "14%",
+      width: "9%",
+      style: overlayBackground("2"),
+      render: (area: any, index: number) => (
+        <OverlayComponent 
+          index="2"
+        />
+      ),      
+    }
+    , {
+      left: "17%",
+      top: "72.5%",
+      height: "14%",
+      width: "9%",
+      style: overlayBackground("3"),
+      render: (area: any, index: number) => (
+        <OverlayComponent 
+          index="3"
+        />
+      ),      
+    }
+    , {
+      left: "17%",
+      top: "58%",
+      height: "14%",
+      width: "9%",
+      style: overlayBackground("4"),
+      render: (area: any, index: number) => (
+        <OverlayComponent 
+          index="4"
+        />
+      ),      
+    }
+    , {
+      left: "6%",
+      top: "37%",
+      height: "14%",
+      width: "9%",
+      style: overlayBackground("5"),
+      render: (area: any, index: number) => (
+        <OverlayComponent 
+          index="5"
+        />
+      ),  
+    }
+    , {
+      left: "6%",
+      top: "22.5%",
+      height: "14%",
+      width: "9%",
+      style: overlayBackground("6"),
+      render: (area: any, index: number) => (
+        <OverlayComponent 
+          index="6"
+        />
+      ),        
+    }
     , {
       left: "2%",
       top: "3%",
@@ -128,18 +209,9 @@ function App() {
       width: "9%",
       style: overlayBackground("7"),
       render: (area: any, index: number) => (
-        <div
-          style={overlayStyle}
-        >
-          <div>
-            {lookup.get("7")}
-          </div>
-          <div
-            style={overlayInOutStyle}
-          >
-            {overlayInOut("7")}
-          </div>
-        </div>
+        <OverlayComponent 
+          index="7"
+        />
       ),
     }
     , {
@@ -149,19 +221,34 @@ function App() {
       width: "9%",
       style: overlayBackground("8"),
       render: (area: any, index: number) => (
-        <div
-          style={overlayStyle}
-        >
-          <div>
-            {lookup.get("8")}
-          </div>
-          <div
-            style={overlayInOutStyle}
-          >
-            {overlayInOut("8")}
-          </div>
-        </div>
+        <OverlayComponent 
+          index="8"
+        />
       ),
+    }
+    , {
+      left: "15.5%",
+      top: "22.5%",
+      height: "14%",
+      width: "9%",
+      style: overlayBackground("9"),
+      render: (area: any, index: number) => (
+        <OverlayComponent 
+          index="9"
+        />
+      ),        
+    }
+    , {
+      left: "15.5%",
+      top: "37%",
+      height: "14%",
+      width: "9%",
+      style: overlayBackground("10"),
+      render: (area: any, index: number) => (
+        <OverlayComponent 
+          index="10"
+        />
+      ),  
     }
   ];
   
