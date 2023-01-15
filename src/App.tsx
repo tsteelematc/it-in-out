@@ -45,8 +45,8 @@ const mapArea: any[] = [
 ];
 
 function App() {
-  // const img = "https://localhost:3000/public/in-out-all.jpg";
-  const img = "https://i.etsystatic.com/28692092/r/il/d13717/2975668784/il_1588xN.2975668784_nj6x.jpg";
+  const img = "https://tsteelematc.github.io/it-in-out/in-out-all.jpg";
+  // const img = "https://i.etsystatic.com/28692092/r/il/d13717/2975668784/il_1588xN.2975668784_nj6x.jpg";
 
   const ImageMapComponent = React.useMemo(
     () => (

@@ -2,6 +2,7 @@
   "name": "it-in-out",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://tsteelematc.github.io/it-in-out",
   "dependencies": {
     "@qiuz/react-image-map": "^1.1.8",
     "@testing-library/jest-dom": "^5.16.5",
