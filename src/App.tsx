@@ -44,14 +44,14 @@ function App() {
     }
   };    
 
-  const updateInEmployees = async () => {
+  const updateInEmployees = async (latest: string[]) => {
     try {
       await API.graphql({
         query: updateStatus
         , variables: {
           input: {
             id: "183dcbc8-5e2e-4bf2-8a4c-f100a776dcdf"
-            , in: inEmployees
+            , in: latest
           }
         }
       });
@@ -138,21 +138,22 @@ function App() {
   ];
   
   const onMapClick = async (area: AreaType, index: number) => {
-    const oneBasedStringIndex = (index + 1).toString();
 
-    console.log(index, oneBasedStringIndex);
-  
-    if (!inEmployees.some(x => x == lookup.get(oneBasedStringIndex))) {
-      setInEmployees([
-        ...inEmployees
-        , lookup.get(oneBasedStringIndex) ?? ""
-      ]);
+    try {
+      const oneBasedStringIndex = (index + 1).toString();
+      // console.log(index, oneBasedStringIndex);
+      await updateInEmployees(
+        !inEmployees.some(x => x == lookup.get(oneBasedStringIndex))
+        ? [
+          ...inEmployees
+          , lookup.get(oneBasedStringIndex) ?? ""
+        ]
+        : inEmployees.filter(x => x != lookup.get(oneBasedStringIndex))
+      );
     }
-    else {
-      setInEmployees(inEmployees.filter(x => x != lookup.get(oneBasedStringIndex)));
+    catch (e) {
+      console.error(e);
     }
-
-    await updateInEmployees();
   };
   
   const img = "https://tsteelematc.github.io/it-in-out/it-in-out-all.jpg";
