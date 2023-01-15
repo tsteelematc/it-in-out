@@ -17,6 +17,17 @@ let inArray: string[] = [];
 
 const lookup = new Map(Object.entries(data));
 
+const overlayStyle: any = {
+  width: "100%",
+  height: "100%",
+  display: "flex",
+  flexDirection: "column",
+  alignItems: "center",
+  justifyContent: "center",
+  fontWeight: 'bold',
+  cursor: "pointer"
+};
+
 function App() {
   console.log(lookup);
 
@@ -86,6 +97,18 @@ function App() {
     }
   };
 
+  const overlayBackground = (index: string) => ({
+    background: inEmployees.some(x => x == lookup.get(index)) 
+      ? "rgba(0, 255, 0, 0.10)"
+      : "rgba(127, 127, 127, 0.10)"
+  });
+
+  const overlayInOut = (index: string) => 
+    inEmployees.some(x => x == lookup.get(index)) 
+      ? "IN"
+      : "OUT"
+  ;
+
   const mapArea: any[] = [
     {}
     , {}
@@ -98,18 +121,10 @@ function App() {
       top: "3%",
       height: "14%",
       width: "9%",
-      style: { background: inEmployees.some(x => x == lookup.get("7")) ? "rgba(0, 255, 0, 0.10)": "rgba(127, 127, 127, 0.10)" },
+      style: overlayBackground("7"),
       render: (area: any, index: number) => (
         <div
-          style={{
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            fontWeight: 'bold',
-          }}
+          style={overlayStyle}
         >
           <div>
             {lookup.get("7")}
@@ -120,29 +135,20 @@ function App() {
               , fontSize: "12px"
             }}
           >
-            {inEmployees.some(x => x == lookup.get("7")) ? "IN" : "OUT"}
+            {overlayInOut("7")}
           </div>
         </div>
       ),
-      onMouseOver: () => console.log("map onMouseOver")
     }
     , {
       left: "11.25%",
       top: "3%",
       height: "14%",
       width: "9%",
-      style: { background: inEmployees.some(x => x == lookup.get("8")) ? "rgba(0, 255, 0, 0.10)": "rgba(127, 127, 127, 0.10)" },
+      style: overlayBackground("8"),
       render: (area: any, index: number) => (
         <div
-          style={{
-            width: "100%",
-            height: "100%",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            fontWeight: 'bold',
-          }}
+          style={overlayStyle}
         >
           <div>
             {lookup.get("8")}
@@ -153,11 +159,10 @@ function App() {
               , fontSize: "12px"
             }}
           >
-            {inEmployees.some(x => x == lookup.get("8")) ? "IN" : "OUT"}
+            {overlayInOut("8")}
           </div>
         </div>
       ),
-      onMouseOver: () => console.log("map onMouseOver")
     }
   ];
   
