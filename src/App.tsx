@@ -10,6 +10,7 @@ interface AreaType extends Area {
 let inArray: string[] = ["Tom"];
 
 const onMapClick = (area: AreaType, index: number) => {
+  console.log(area);
   const tip = `click map${area.href || index + 1}`;
   console.log(tip);
   alert(tip);
@@ -36,14 +37,13 @@ const mapArea: any[] = [
     render: (area: any, index: number) => (
       <div
         style={{
+          width: "100%",
+          height: "100%",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          justifyItems: 'center',
-          alignContent: 'center',
           fontWeight: 'bold',
-          height: '90px'
         }}
       >
         <div>
