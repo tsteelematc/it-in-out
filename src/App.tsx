@@ -28,6 +28,11 @@ const overlayStyle: any = {
   cursor: "pointer"
 };
 
+const overlayInOutStyle: any = {
+  fontWeight: "normal"
+  , fontSize: "12px"
+};
+
 function App() {
   console.log(lookup);
 
@@ -130,10 +135,7 @@ function App() {
             {lookup.get("7")}
           </div>
           <div
-            style={{
-              fontWeight: "normal"
-              , fontSize: "12px"
-            }}
+            style={overlayInOutStyle}
           >
             {overlayInOut("7")}
           </div>
@@ -154,10 +156,7 @@ function App() {
             {lookup.get("8")}
           </div>
           <div
-            style={{
-              fontWeight: "normal"
-              , fontSize: "12px"
-            }}
+            style={overlayInOutStyle}
           >
             {overlayInOut("8")}
           </div>
