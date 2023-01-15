@@ -32,11 +32,12 @@ const mapArea: any[] = [
     top: "3%",
     height: "14%",
     width: "9%",
-    style: { background: inArray.some(x => x == "Tom") ? "rgba(0, 255, 0, 0.25)": "rgba(127, 127, 127, 0.25)" },
+    style: { background: inArray.some(x => x == "Tom") ? "rgba(0, 255, 0, 0.10)": "rgba(127, 127, 127, 0.10)" },
     render: (area: any, index: number) => (
       <div
         style={{
           display: "flex",
+          flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
           justifyItems: 'center',
@@ -45,7 +46,17 @@ const mapArea: any[] = [
           height: '90px'
         }}
       >
-        Tom
+        <div>
+          Tom
+        </div>
+        <div
+          style={{
+            fontWeight: "normal"
+            , fontSize: "12px"
+          }}
+        >
+          {inArray.some(x => x == "Tom") ? "IN" : "OUT"}
+        </div>
       </div>
     ),
     onMouseOver: () => console.log("map onMouseOver")
