@@ -25,7 +25,14 @@ const overlayStyle: any = {
   alignItems: "center",
   justifyContent: "center",
   fontWeight: 'bold',
-  cursor: "pointer"
+  cursor: "pointer",
+};
+
+const overlayNameStyle: any = {
+  overflow: "hidden"
+  , whiteSpace: "nowrap"
+  , textOverflow: "ellipsis"
+  , width: "100%"
 };
 
 const overlayInOutStyle: any = {
@@ -118,7 +125,9 @@ function App() {
     <div
     style={overlayStyle}
     >
-      <div>
+      <div
+        style={overlayNameStyle}
+      >
         {lookup.get(index)}
       </div>
       <div
